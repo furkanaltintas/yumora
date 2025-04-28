@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Food } from '../shared/models/Food';
+import { Tag } from '../shared/models/Tag';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class FoodService {
         origins: ['Türkiye'],
         stars: 4,
         imageUrl: '/images/foods/3.jpg',
-        tags: ['FastFood,', 'Tost', 'Lunch']
+        tags: ['FastFood,', 'Tost', 'Breakfast']
       },
       {
         id: 4,
@@ -63,7 +64,7 @@ export class FoodService {
         origins: ['Türkiye'],
         stars: 4,
         imageUrl: '/images/foods/5.jpg',
-        tags: ['FastFood,', 'Kebap', 'Lunch']
+        tags: ['FastFood,', 'Kebap', 'Dinner']
       },
       {
         id: 6,
@@ -74,8 +75,35 @@ export class FoodService {
         origins: ['Amerika'],
         stars: 5,
         imageUrl: '/images/foods/6.jpg',
-        tags: ['FastFood,', 'Tavuk', 'Lunch']
+        tags: ['FastFood,', 'Tavuk', 'Dinner']
       }
     ];
+  }
+
+  getAllTags(): Tag[] {
+    return [
+      { name: 'All', count: 14 },
+      { name: 'FastFood', count: 4 },
+      { name: 'Pizza', count: 2 },
+      { name: 'Lunch', count: 3 },
+      { name: 'SlowFood', count: 2 },
+      { name: 'Hamburger', count: 1 },
+      { name: 'Fry', count: 1 },
+      { name: 'Soup', count: 1 }
+    ];
+  }
+
+  getAllFoodsByTag(tag: string): Food[] {
+    return tag == "All" ? this.getAll() : this.getAll().filter(food => food.tags?.includes(tag));
+  }
+
+  getAllFoodsBySearchTerm(searchTerm:string): Food[] {
+    return this
+          .getAll()
+          .filter((food) =>
+            food.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            food.tags?.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            food.origins.some((origin) => origin.toLowerCase().includes(searchTerm.toLowerCase()))
+          );
   }
 }
