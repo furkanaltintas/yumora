@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Tag } from '../../shared/models/Tag';
 import { CommonModule } from '@angular/common';
 import { FoodService } from '../../services/food.service';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tags',
@@ -11,13 +11,29 @@ import { RouterModule } from '@angular/router';
   styleUrl: './tags.component.css',
 })
 export class TagsComponent {
-  tags: Tag[] = [];
+  @Input() foodPageTags?: string[];
+  @Input() justifyContent: string = 'center';
+
+  tags?: Tag[] = [];
+  tagClick: boolean = false;
 
   constructor(
-    private foodService: FoodService
-  ) { }
+    private foodService: FoodService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.tags = this.foodService.getAllTags();
+    if (!this.foodPageTags) this.tags = this.foodService.getAllTags();
+
+    this.route.params.subscribe((params) => {
+      if (params['tag']) {
+        this.tagClick = true;
+      }
+    });
+  }
+
+  tagSearchClear() {
+    this.router.navigate(['/']);
   }
 }

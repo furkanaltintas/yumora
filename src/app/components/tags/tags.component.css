@@ -1,0 +1,18 @@
+div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+a {
+    background-color: #dddddd;
+    padding: .3rem 1rem;
+    margin: .2rem .15rem;
+    border-radius: 10rem;
+    font-weight: bold;
+    color: #af1313;
+}
+
+a.active {
+    background-color: #af1313;
+    color: #dddddd;
+}
