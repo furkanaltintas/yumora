@@ -18,3 +18,62 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+.swal2-popup.swal2-modal.custom-swal-popup.swal2-show {
+    border-left: 8px solid green;
+    display: flex !important;
+}
+
+.swal2-actions {
+    margin: 0;
+}
+
+.custom-swal-popup {
+    width: 300px; /* Genişlik */
+    padding: 10px; /* İçerik için boşluk */
+    background-color: #f6fff6; /* Açık yeşil arka plan */
+    border-radius: 10px; /* Köşeleri yuvarla */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* İçeriği sola hizala */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+.custom-swal-popup .swal2-title {
+    font-size: 16px; /* Başlık boyutu */
+    font-weight: bold;
+    color: #333; /* Başlık rengi */
+    margin-bottom: 5px;
+}
+
+.custom-swal-link-button,
+.custom-swal-undo-button {
+    background: none;
+    border: none;
+    color: green;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0;
+    padding-left: 0.9em;
+}
+
+div:where(.swal2-container) div:where(.swal2-actions):not(.swal2-loading) .swal2-styled:hover {
+    background-image: none !important;
+}
+
+.custom-swal-close-button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 22px;
+    color: #b1b1b1; /* Çarpı işaretinin rengi */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.custom-swal-close-button:hover {
+    color: red; /* Hover durumunda çarpı işaretinin rengi */
+}
