@@ -34,9 +34,6 @@ Swal (SweetAlert2)
 Local Storage ile geçici veri yönetimi
 
 ### ⚙️ Kurulum
-bash
-Kopyala
-Düzenle
 git clone https://github.com/kullanici-adi/yumora.git
 cd yumora
 npm install
