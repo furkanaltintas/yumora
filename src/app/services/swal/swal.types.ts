@@ -1,0 +1,2 @@
+export type SweetAlertIcon = 'success' | 'error' | 'warning' | 'info' | 'question';
+export type SweetAlertPosition = 'top' | 'top-start' | 'top-end' | 'center' | 'center-start' | 'center-end' | 'bottom' | 'bottom-start' | 'bottom-end';
