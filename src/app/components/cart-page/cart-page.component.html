@@ -1,0 +1,80 @@
+<app-not-found 
+    [visible]="!cart || cart.items.length <= 0" 
+    notFoundMessage="Cart Page Is Empty!" 
+    resetLinkText="Go To Homepage">
+</app-not-found>
+
+@if(cart && cart.items.length > 0) {
+    <div class="container">
+        <ul>
+            @for (cartItem of cart.items; track cartItem) {
+                <li>
+                    <div>
+                        <a routerLink="/food/{{cartItem.food.id}}">
+                            <img [src]="cartItem.food.imageUrl" [alt]="cartItem.food.name">
+                        </a>
+                    </div>
+                    <div>
+                        <a routerLink="/food/{{cartItem.food.id}}">
+                            {{ cartItem.food.name }}
+                        </a>
+                    </div>
+                    <div>
+                        @if(cartItem.quantity > 1) {
+                            <span class="decrease" (click)="decreaseQuantity(cartItem)">➖</span>
+                        } @else {
+                            <span class="decrease" (click)="removeFromCart(cartItem)">🗑️</span>
+                        }
+                        <span class="quantity">{{ cartItem.quantity }}</span>
+                        <span class="increase" (click)="increaseQuantity(cartItem)">➕</span>
+                        @if(cartItem.quantity > 1) {
+                            <span class="trash" (click)="removeFromCart(cartItem)">🗑️</span>
+                        }
+                    </div>
+                    <div>
+                        {{ cartItem.price | currency }}
+                    </div>
+                    @if(cartItem.quantity > 100) { <!-- Kullanıma kapattım. Siz isterseniz bu kısmı açıp yukarıyı iptal edebilirsiniz. -->
+                        <div>
+                            <button class="remove-button" (click)="removeFromCart(cartItem)">
+                                Remove
+                            </button>
+                        </div>
+                    }
+                </li>
+            }
+        </ul>
+        
+        @if(cart.items.length > 0) {
+            <div class="checkout">
+                <div>
+                    <div class="foods-count">{{ cart.items.length }}</div>
+                    <div class="total-price">{{ totalPrice() | currency }}</div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+<!-- ESKİ YÖNTEM -->
+<!-- <div>
+    <select 
+    [(ngModel)]="cartItem.quantity"
+    (change)="changeQuantity(cartItem, cartItem.quantity.toString())"
+    >
+        <option *ngFor="let qty of [1, 2, 3 ,4, 5, 6, 7, 8, 9, 10]" [value]="qty">{{ qty }}</option>
+    </select>
+</div> 
+
+
+İKİNCİ YÖNTEM
+<input
+    class="quantity"
+    type="number"
+    [(ngModel)]="cartItem.quantity"
+    (change)="changeQuantity(cartItem, cartItem.quantity.toString())"
+    min="1"
+    max="100"
+/>
+-->
