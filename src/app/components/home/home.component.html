@@ -1,16 +1,23 @@
 <app-search></app-search>
 <app-tags></app-tags>
+<app-not-found [visible]="!foods || foods.length <= 0" resetLinkText="Reset Search"></app-not-found>
 
 <ul>
   @for (food of foods; track food) {
-  <li>
-    <a href="#">
+  <li (mouseenter)="hoveredFood = food.id" (mouseleave)="hoveredFood = null">
+    <a routerLink="/food/{{food.id}}">
       <img src="{{ food.imageUrl }}" alt="{{ food.name }}" />
       <div class="content">
         <div class="name">
           {{ food.name }}
         </div>
-        <span class="favorite {{ food.favorite ? '' : 'not' }}">❤</span>
+        <span 
+          class="favorite" 
+          [class.not]="!food.favorite" 
+          (click)="favoriteChange(food.id, $event)"
+        >
+          ❤
+        </span>
         <div class="stars">
             <span class="star" *ngFor="let _ of createArray(food.stars)"> ⭐ </span>
         </div>   
@@ -29,6 +36,9 @@
           <span>
             {{ food.price | currency }}
           </span>
+        </div>
+        <div class="addToCart">
+          <button *ngIf="hoveredFood === food.id" (click)="addToCart(food, $event)">Add to Cart</button>
         </div>
       </div>
     </a>
