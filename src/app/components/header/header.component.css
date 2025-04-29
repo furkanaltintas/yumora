@@ -1,7 +1,7 @@
 header {
-    background-color: white;
+    background-color: #dddddd;
     padding: 0;
-    border-bottom: 1px solid #e72929;
+    border-bottom: 1px solid #af1313;
 }
 
 a {
@@ -9,7 +9,7 @@ a {
 }
 
 a:hover {
-    background: #e72929;
+    background: #af1313;
     color: white;
 }
 
